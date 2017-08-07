@@ -18,20 +18,29 @@ Descrição: Sistema de agendamento de endereços:
     retornaEnd(cat end, ) = retorna endereço.
 */
 
+
+//-----------------------------------------------------------------------------------
 // Define uma struct que recebe 2 valores: nome e endereço
+//-----------------------------------------------------------------------------------
 typedef struct catalogo{
     char nome[50], end[100];
 } cat;
 
+//-----------------------------------------------------------------------------------
 //variável global para verificar o tamanho do vetor de struct
+//-----------------------------------------------------------------------------------
 int cont = 0;
 
-//Primeira função, que cria um vetor de Cat nulo chamado Lista;
+//-----------------------------------------------------------------------------------
+//Primeira função, que cria um vetor de Cat nulo chamado Lista
+//-----------------------------------------------------------------------------------
 void init(){
     cat *lista = (cat*) malloc (1*sizeof(cat));
 }
 
+//-----------------------------------------------------------------------------------
 //Segunda função, para adicionar um novo valor à lista de endereços
+//-----------------------------------------------------------------------------------
 void insere(cat *lista, char nome[30], char end[100]){
     int i=0, verif=0;
     lista = (cat*) realloc (lista, (cont+1)*sizeof(cat));
@@ -47,7 +56,6 @@ void insere(cat *lista, char nome[30], char end[100]){
                 verif=1;
         }
         if(verif == 0){
-            printf("%s\n\n\n", "VERIFICADOR");
             strcpy(lista[cont].nome, nome);
             strcpy(lista[cont].end, end);
             cont = cont+1;
@@ -55,9 +63,11 @@ void insere(cat *lista, char nome[30], char end[100]){
     }
 }
 
+//-----------------------------------------------------------------------------------
 //Função para remover endereço da lista. Recebe nome, e procura na lista.
 // se encontrar, a função sobrescreve os valores posteriores, decrementa o contador
 // e realoca a memória para o valor adequado.
+//-----------------------------------------------------------------------------------
 void remover(cat *lista, char *nome){
     int i=0, j=0;
     for(i=0 ; i<cont ; i++){
@@ -72,6 +82,9 @@ cont--;
 lista = (cat*) realloc (lista, (cont)*sizeof(cat));
 }
 
+//-----------------------------------------------------------------------------------
+// Função oara retornar o endereço quando o usuário fornece o nome
+//-----------------------------------------------------------------------------------
 void retornaEnd(cat *lista, char *nome){
     int i;
     for(i=0 ; i<cont ; i++){
@@ -80,32 +93,12 @@ void retornaEnd(cat *lista, char *nome){
         }
     }
 }
+//-----------------------------------------------------------------------------------
+// Função para imprimir a lista completa dos registros
+//-----------------------------------------------------------------------------------
 
 void printLista(cat *lista){
     for(int i=0 ; i<cont ; i++){
         printf("nome: %s, endereco: %s\n", lista[i].nome, lista[i].end);
     }
-}
-
-int main(){
-    init();
-    cat *lista = (cat*) malloc (1*sizeof(cat));
-    int opcao;
-    char nome[30], endereco[100];
-
-
-    while(opcao != -1){
-        printf("%s", "1: adicionar\n2: remover\n3: procurar\n4: imprimir toda a lista\n\n");
-        scanf("%d", &opcao);
-        switch(opcao){
-            case 1:
-                scanf("%s", nome);
-                scanf("%s", endereco);
-                insere(lista, nome, endereco);
-                printf("\n\n%d", cont);
-        }
-    }
-
-    printf("%d", cont);
-    return 0;
 }
