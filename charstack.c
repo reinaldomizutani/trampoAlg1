@@ -10,12 +10,13 @@ typedef struct{
     int top;
     char **stk;
 } stack;
+
 stack pilha;
 
 // ----------------------------------------------------------------------------------------------------------
 // Function for reading dynamic allocated strings
 // ----------------------------------------------------------------------------------------------------------
-void *ler(){
+char* ler(){
     int a=0;
     char aux, *vetor=NULL;
     scanf(" %c", &aux);
@@ -39,9 +40,9 @@ void push(){
     if(pilha.top == MAX - 1){
         printf("%s", "stack is full");
     }else{
-        printf("%s", "type the name");
+        printf("%s", "type the name: ");
         vetor = ler();
-        printf("%s %s", vetor, "foi adicionado à variável TESTE");
+        printf("%s %s", vetor, "foi adicionado a variavel TESTE\n");
 
         while(aux != '\0'){
             aux = vetor[a];
@@ -50,21 +51,23 @@ void push(){
 // ----------------------------------------------------------------------------------------------------------
 // algo de errado não está serto nas linhas 53 e 57
 // ----------------------------------------------------------------------------------------------------------
-        *pilha.stk = (char**) realloc (pilha.stk, (cont+1)*sizeof(char*));
-        printf("%s", "primeira realocação completa!");
+        pilha.stk = (char**) realloc (pilha.stk, (cont+1)*sizeof(char*));
+        printf("%s", "primeira realocacao completa!\n");
         cont = cont + 1;
 
-        pilha.stk = (char*) realloc (pilha.stk, (a)*sizeof(char));
-        printf("%s", "segunda realocação completa!");
+        pilha.stk[cont] = (char*) realloc (pilha.stk, (a)*sizeof(char));
+        printf("%s", "segunda realocacao completa!\n");
         
         pilha.stk[pilha.top] = vetor;
-        printf("%s %s", pilha.stk[pilha.top], "foi adicionado à pilha");
+        printf("%s %s", pilha.stk[pilha.top], "foi adicionado a pilha\n");
         pilha.top = pilha.top+1;
     }
     return;
 }
 
+
 int main(){
     push();
+    printf("\n\n\n stack : %s", pilha.stk[0]);
     return 0;
 }
