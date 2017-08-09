@@ -8,6 +8,8 @@ typedef struct{
     char **stk;
 } stack;
 
+stack pilha;
+
 void *ler(){
     int a=0;
     char aux, *vetor=NULL;
@@ -21,16 +23,29 @@ void *ler(){
     vetor[a] = '\0';
     return vetor;
 }
-stack pilha;
 
 void push(){
-    char *vetor = NULL;
+    char *vetor = NULL, aux='a';
+    int a=0;
+    int cont=0;
     if(pilha.top == MAX - 1){
         printf("%s", "stack is full");
     }else{
         printf("%s", "type the name");
         vetor = ler();
         printf("%s %s", vetor, "foi adicionado à variável TESTE");
+
+        while(aux != '\0'){
+            aux = vetor[a];
+            a = a+1;
+        }
+        *pilha.stk = (char**) realloc (pilha.stk, (cont+1)*sizeof(char*));
+        printf("%s", "primeira realocação completa!");
+        cont = cont + 1;
+
+        pilha.stk = (char*) realloc (pilha.stk, (a)*sizeof(char));
+        printf("%s", "segunda realocação completa!");
+        
         pilha.stk[pilha.top] = vetor;
         printf("%s %s", pilha.stk[pilha.top], "foi adicionado à pilha");
         pilha.top = pilha.top+1;
