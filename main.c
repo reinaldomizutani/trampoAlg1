@@ -9,12 +9,16 @@ int main(){
     char *nome=NULL, *telefone=NULL, *email=NULL;
     int nusp;
 
+//      adicionar livro:
+    char *titulo = NULL, *autor = NULL, *editora = NULL;
+    int ano, edicao, qtd;
+
 // 2. CÓDIGO
     criaUsuarios(&usuarios);
     criaAcervo(&acervo);
 
 
-
+// switch case inicial para saber o que o operador deseja fazer.
 scanf("%d", opcao);
 swith(opcao){
     
@@ -36,6 +40,17 @@ swith(opcao){
         break;
 
     case: 2     //Cadastrar livro
+
+    //    char *titulo = NULL, *autor = NULL, *editora = NULL;
+    //    int ano, edicao, qtd;
+
+        titulo = lerstr();
+        autor = lerstr();
+        editora = lerstr();
+        scanf("%d", &ano);
+        scanf("%d", &edicao);
+        scanf("%d", &qtd);
+
         if (duplicadoLivros(&titulo, &autor, &isbn, &editora, &ano, &edicao)){
             adicionaDuplicado(&isbn);
         }
@@ -56,11 +71,11 @@ swith(opcao){
 
 
     case: 4     //Retornar livro,
-        removeLivro();
+        removeLivro(&isbn);
         break;
         
     case: 5     //adicionar usuario
-        removeUsuario();
+        removeUsuario(&nusp);
         break;    
 
     default :
