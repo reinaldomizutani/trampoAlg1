@@ -1,86 +1,38 @@
-#include "dinamico.h"
+#include "dinamico.c"
 
 int main(){
-// 1. DECLARAÇÃO DE VARIÁVEIS
-    int opcao;
-    usuario usuarios = NULL; 
-    livros acervo = NULL;
-//      adicionar usuarios:
-    char *nome=NULL, *telefone=NULL, *email=NULL;
-    int nusp;
+// declaracao de variaveis
+    int opcao, erro;
+    char *nome = NULL, *email = NULL, *telefone = NULL, *nusp = NULL;
+    Usuarios usuarios;
+// codigo
 
-//      adicionar livro:
-    char *titulo = NULL, *autor = NULL, *editora = NULL;
-    int ano, edicao, qtd;
+    //inicia lista de usuarios
+    criaUsuario(&usuarios);
 
-// 2. CÓDIGO
-    criaUsuarios(&usuarios);
-    criaAcervo(&acervo);
+    printf("digite a opcao desejada (-1 para sair)\n");
+    scanf("%d",&opcao);
 
+    while(opcao != -1){
+        switch(opcao){
+            case 1: // cadastrar usuario;
 
-// switch case inicial para saber o que o operador deseja fazer.
-scanf("%d", opcao);
-swith(opcao){
-    
-    case: 1     //cadastrar usuario
-        nome = lerstr();
-        telefone = lerstr();
-        email = lerstr();
-        scanf("%d", & nusp);
-
-        if (duplicadosUsuarios(&nome, &telefone, &email, &nusp)){
-            printf("Esse usuário já está cadastrado!")
-            break;
+                printf("nome: ");
+                nome = lerstr();
+                printf("telefone: ");
+                telefone = lerstr();
+                printf("nusp: ");
+                nusp = lerstr();
+                printf("email: ");
+                email = lerstr();
+                cadastraUsuario(&usuarios, nome, email, telefone, nusp, &erro);
+                break;
+            default:
+                printf("OPCAO ERRADA MANE");
         }
-        else{
-            cadastraUsuario(&nome, &telefone, &email, &nusp);
-            break;
-        }
-        
-        break;
 
-    case: 2     //Cadastrar livro
-
-    //    char *titulo = NULL, *autor = NULL, *editora = NULL;
-    //    int ano, edicao, qtd;
-
-        titulo = lerstr();
-        autor = lerstr();
-        editora = lerstr();
-        scanf("%d", &ano);
-        scanf("%d", &edicao);
-        scanf("%d", &qtd);
-
-        if (duplicadoLivros(&titulo, &autor, &isbn, &editora, &ano, &edicao)){
-            adicionaDuplicado(&isbn);
-        }
-        else{
-            adicionaLivro(&titulo, &autor, &isbn, &editora, &ano, &edicao);
-        }
-        break;    
-
-
-    case: 3     //Retirar livro
-        if (livroDisponivel(&isbn))
-            retiraLivro(&nusp, &isbn);
-            break;
-        else{
-            adicionaEspera(&nusp, &isbn)
-        }
-        break;
-
-
-    case: 4     //Retornar livro,
-        removeLivro(&isbn);
-        break;
-        
-    case: 5     //adicionar usuario
-        removeUsuario(&nusp);
-        break;    
-
-    default :
-        printf("opção não é válida");
-
-}//fim do switch case
+    printf("digite a opcao desejada (-1 para sair)\n");
+    scanf("%d",&opcao);
+    }
     return 0;
 }
