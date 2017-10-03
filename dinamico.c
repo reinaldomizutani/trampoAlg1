@@ -60,4 +60,5 @@ char *lerstr(){
     }
     vetor[a]='\0';
     return vetor;
+    a=0;
 }
